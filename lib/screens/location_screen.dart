@@ -33,7 +33,6 @@ class _LocationScreenState extends State<LocationScreen> {
   void initState() {
     super.initState();
     updateUI(widget.locationWeather);
-    print(temperature);
   }
 
   @override
