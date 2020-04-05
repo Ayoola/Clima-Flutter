@@ -19,7 +19,7 @@ const kConditionTextStyle = TextStyle(
   fontSize: 100.0,
 );
 
-const kTextFieldDecoration = InputDecoration(
+const kTextFieldInputDecoration = InputDecoration(
   filled: true,
   fillColor: Colors.white,
   hintText: 'Enter City Name',
