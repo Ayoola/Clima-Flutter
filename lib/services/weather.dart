@@ -1,5 +1,25 @@
+import 'package:clima/services/location.dart';
+import 'package:clima/services/networking.dart';
+
+const apiKey = 'cb602ec1df94571ca0a13775bc5d0254';
+const openWeatherURL = 'https://api.openweathermap.org/data/2.5/weather?';
+
 class WeatherModel {
-  String getWeatherIcon(int condition) {
+  static Future<dynamic> getLocationWeather() async {
+    Location location = Location();
+
+    await location.getCurrentLocation();
+
+    String url =
+        '${openWeatherURL}lat=${location.latitude}&lon=${location.longitude}&units=imperial&appid=$apiKey';
+
+    NetworkHelper networkHelper = NetworkHelper(url);
+    var weatherData = await networkHelper.getWeatherData();
+
+    return weatherData;
+  }
+
+  static String getWeatherIcon(int condition) {
     if (condition < 300) {
       return '🌩';
     } else if (condition < 400) {
@@ -19,12 +39,12 @@ class WeatherModel {
     }
   }
 
-  String getMessage(int temp) {
-    if (temp > 25) {
+  static String getMessage(double temp) {
+    if (temp > 77) {
       return 'It\'s 🍦 time';
-    } else if (temp > 20) {
+    } else if (temp > 68) {
       return 'Time for shorts and 👕';
-    } else if (temp < 10) {
+    } else if (temp < 50) {
       return 'You\'ll need 🧣 and 🧤';
     } else {
       return 'Bring a 🧥 just in case';
